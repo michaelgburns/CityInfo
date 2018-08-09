@@ -1,0 +1,5 @@
+/.vs/CityInfo/v15
+/.vs/config/applicationhost.config
+/CityInfo/bin/Debug/netcoreapp2.0
+/CityInfo/obj/CityInfo.csproj.nuget.cache
+/CityInfo/obj

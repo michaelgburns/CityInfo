@@ -19,14 +19,24 @@ namespace CityInfo.Models
                 {
                     Id          = 1,
                     Name        = "Dublin",
-                    Description = "Dublin city"
+                    Description = "Dublin city",
+                    PointsOfInterest = new List<PointOfInterestDto>
+                    {
+                        new PointOfInterestDto{ Id = 1, Name = "Croke park", Description = "Football field"},
+                        new PointOfInterestDto{ Id = 2, Name = "Henry street", Description = "Shopping area"}
+                    }
                 },
 
                 new CityDto
                 {
                     Id          = 2,
                     Name        = "Belfast",
-                    Description = "Belfast city"
+                    Description = "Belfast city",
+                    PointsOfInterest = new List<PointOfInterestDto>
+                    {
+                        new PointOfInterestDto{ Id = 1, Name = "Zoo", Description = "Zoo for wild animals"},
+                        new PointOfInterestDto{ Id = 2, Name = "Merchant hotel", Description = "Overpriced hotel"}
+                    }
                 }
             };
         }

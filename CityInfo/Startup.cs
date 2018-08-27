@@ -10,6 +10,8 @@ using Newtonsoft.Json.Serialization;
 using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.Extensions.Logging;
 using NLog.Extensions.Logging;
+using CityInfo.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace CityInfo
 {
@@ -20,7 +22,10 @@ namespace CityInfo
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().AddMvcOptions(o => o.OutputFormatters.Add(new XmlDataContractSerializerOutputFormatter()));
-                //.AddJsonOptions(o => //This section is just an example of overriding the default Json set up
+
+            var connectionString = @"Data Source=WIN-3GOMQNE45BK\MYSERVER;Initial Catalog=CityInfoDb;Integrated Security=False;User Id=sa;Password=Pa$$w0rd;MultipleActiveResultSets=True";
+            services.AddDbContext<CityInfoContext>(o => o.UseSqlServer(connectionString));
+            //.AddJsonOptions(o => //This section is just an example of overriding the default Json set up
                 //{
                 //    if (o.SerializerSettings != null)
                 //    {

@@ -11,9 +11,10 @@ using System;
 namespace CityInfo.Migrations
 {
     [DbContext(typeof(CityInfoContext))]
-    partial class CityInfoContextModelSnapshot : ModelSnapshot
+    [Migration("20180827154559_CityInfoDbAddPointOfInterestDescription")]
+    partial class CityInfoDbAddPointOfInterestDescription
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

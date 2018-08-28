@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,10 +14,12 @@ namespace CityInfo.Controllers
     public class PointsOfInterestController : Controller
     {
         private ILogger<PointsOfInterestController> _logger;
+        private readonly AppSettings _appSettings;
 
-        public PointsOfInterestController(ILogger<PointsOfInterestController> logger)
+        public PointsOfInterestController(ILogger<PointsOfInterestController> logger, IOptions<AppSettings> appSettings)
         {
-            _logger = logger;
+            _logger      = logger;
+            _appSettings = appSettings.Value;
         }
 
         [HttpGet("{cityId}/pointsofinterest")]
@@ -27,6 +30,7 @@ namespace CityInfo.Controllers
             if (city == null)
             {
                 _logger.LogInformation($"The city with the id {cityId} can not be found. When accessing point of interest.");
+                _logger.LogInformation(_appSettings.TestErrorMessage);
                 return NotFound();
             };
 

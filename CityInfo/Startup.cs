@@ -10,6 +10,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using NLog.Extensions.Logging;
 using CityInfo.Extensions;
+using CityInfo.Services;
 
 namespace CityInfo
 {
@@ -36,6 +37,8 @@ namespace CityInfo
             services.AddDbContext<CityInfoContext>(o => o.UseSqlServer(connectionString));
 
             services.Configure<AppSettings>(Configuration.GetSection("ApplicationSettings"));
+
+            services.AddScoped<ICityInfoRepository, CityInfoRepository>();
 
             //.AddJsonOptions(o => //This section is just an example of overriding the default Json set up
                 //{

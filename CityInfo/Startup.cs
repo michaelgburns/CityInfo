@@ -11,6 +11,7 @@ using Microsoft.Extensions.Logging;
 using NLog.Extensions.Logging;
 using CityInfo.Extensions;
 using CityInfo.Services;
+using AutoMapper;
 
 namespace CityInfo
 {
@@ -40,6 +41,8 @@ namespace CityInfo
 
             services.AddScoped<ICityInfoRepository, CityInfoRepository>();
 
+            services.AddAutoMapper();
+
             //.AddJsonOptions(o => //This section is just an example of overriding the default Json set up
                 //{
                 //    if (o.SerializerSettings != null)
@@ -68,14 +71,23 @@ namespace CityInfo
             app.UseStatusCodePages();
             app.UseMvc();
 
-            AutoMapper.Mapper.Initialize(cfg => {
-                cfg.CreateMap<Entities.City, Models.CityWithoutPointsOfInterestDto>();
-            });
+            //AutoMapper.Mapper.Initialize(cfg => {
+            //    cfg.CreateMap<Entities.City, Models.CityWithoutPointsOfInterestDto>();
+            //});
 
             app.Run(async (context) =>
             {
                 await context.Response.WriteAsync("Hello World!");
             });
+        }
+    }
+
+    public class MappingProfile : Profile
+    {
+        public MappingProfile()
+        {
+            // Add as many of these lines as you need to map your objects
+            CreateMap<Entities.City, Models.CityWithoutPointsOfInterestDto> ();            
         }
     }
 }

@@ -1,7 +1,10 @@
-﻿using CityInfo.Controllers;
+﻿using AutoMapper;
+using CityInfo.Controllers;
 using CityInfo.Models;
+using CityInfo.Services;
 using Machine.Specifications;
 using Microsoft.AspNetCore.Mvc;
+using NSubstitute;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -11,11 +14,16 @@ namespace Unit.Controllers.CitiesControllerTests
     [Subject(typeof(CitiesController))]
     public class Context
     {
+        public static ICityInfoRepository repository;
         public static CitiesController controller;
+        public static IMapper mapper;
 
         public Context()
         {
-            controller = new CitiesController();
+            repository = Substitute.For<ICityInfoRepository>();
+            mapper     = Substitute.For<IMapper>();
+
+            controller = new CitiesController(repository, mapper);
         }
     }
 

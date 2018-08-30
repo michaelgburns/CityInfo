@@ -13,17 +13,19 @@ namespace CityInfo.Controllers
     public class CitiesController : Controller
     {
         private ICityInfoRepository _cityInfoRepository;
+        private readonly IMapper _mapper;
 
-        public CitiesController(ICityInfoRepository cityInfoRepository)
+        public CitiesController(ICityInfoRepository cityInfoRepository, IMapper mapper)
         {
             _cityInfoRepository = cityInfoRepository;
+            _mapper = mapper;
         }
 
         [HttpGet]
         public IActionResult GetCities()
         { 
             var cityEntities = _cityInfoRepository.GetCities();
-            var results      = Mapper.Map<IEnumerable<CityWithoutPointsOfInterestDto>>(cityEntities);
+            var results      = _mapper.Map<IEnumerable<CityWithoutPointsOfInterestDto>>(cityEntities);
 
             return Ok(results);
         }
